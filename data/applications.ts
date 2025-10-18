@@ -75,6 +75,10 @@ export function createApplication(input: {
 
 const DATA_DIR = path.join(process.cwd(), 'data');
 const DATA_PATH = path.join(DATA_DIR, 'applications.json');
+const IS_VERCEL = process.env.VERCEL === '1';
+
+type GlobalWithApps = typeof globalThis & { __APPLICATIONS_STORE?: Application[] };
+const g = globalThis as GlobalWithApps;
 
 function ensureDataDir() {
   try {
@@ -85,23 +89,30 @@ function ensureDataDir() {
 }
 
 function readApplications(): Application[] {
-  try {
-    const raw = fs.readFileSync(DATA_PATH, 'utf-8');
-    const parsed = JSON.parse(raw) as Application[];
-    return Array.isArray(parsed) ? parsed : [];
-  } catch {
-    // If file doesn't exist yet, seed with defaults
-    ensureDataDir();
-    try {
-      fs.writeFileSync(DATA_PATH, JSON.stringify(DEFAULT_APPLICATIONS, null, 2), 'utf-8');
-    } catch {
-      // ignore write errors
+  if (!g.__APPLICATIONS_STORE) {
+    let initial: Application[] = DEFAULT_APPLICATIONS;
+    if (!IS_VERCEL) {
+      try {
+        const raw = fs.readFileSync(DATA_PATH, 'utf-8');
+        const parsed = JSON.parse(raw) as Application[];
+        if (Array.isArray(parsed)) initial = parsed;
+      } catch {
+        // ignore
+      }
     }
-    return DEFAULT_APPLICATIONS;
+    g.__APPLICATIONS_STORE = initial;
   }
+  return g.__APPLICATIONS_STORE;
 }
 
 function writeApplications(apps: Application[]) {
-  ensureDataDir();
-  fs.writeFileSync(DATA_PATH, JSON.stringify(apps, null, 2), 'utf-8');
+  g.__APPLICATIONS_STORE = apps;
+  if (!IS_VERCEL) {
+    ensureDataDir();
+    try {
+      fs.writeFileSync(DATA_PATH, JSON.stringify(apps, null, 2), 'utf-8');
+    } catch {
+      // ignore
+    }
+  }
 }
