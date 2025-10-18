@@ -65,7 +65,7 @@ export function ApplyToVacancy({ vacancyId, canApply, alreadyApplied }: Props) {
               <Button variant="light" onClick={() => setOpened(false)} type="button">
                 Cancel
               </Button>
-              <Button type="submit">Send application</Button>
+              <Button type="submit" className='submit_applicaiotn'>Send application</Button>
             </Group>
           </Stack>
         </form>

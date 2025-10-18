@@ -1,34 +1,42 @@
 [
   {
-    "id": "seed-app-1",
+    "id": "mgwnpyhx.1nt",
     "vacancyId": "1",
     "userId": "seed-employee-3",
-    "message": "Hi Aigul, I am interested in the Frontend role. I have React and JS experience. Thanks!",
+    "message": "",
     "status": "submitted",
-    "createdAt": 1760792560395
+    "createdAt": 1760814887397
   },
   {
-    "id": "seed-app-2",
-    "vacancyId": "3",
-    "userId": "seed-employee-3",
-    "message": "Hello! I am a junior full-stack dev and would love to join as Backend Engineer.",
-    "status": "submitted",
-    "createdAt": 1760793160395
-  },
-  {
-    "id": "mgwb5l2p.dsg",
-    "vacancyId": "6",
-    "userId": "seed-employee-3",
-    "message": "asdasd",
-    "status": "submitted",
-    "createdAt": 1760793781489
-  },
-  {
-    "id": "mgwbcek5.y7g",
+    "id": "mgwnt3h9.2vs",
     "vacancyId": "2",
     "userId": "seed-employee-3",
-    "message": "sdfsdf",
+    "message": "",
     "status": "submitted",
-    "createdAt": 1760794099637
+    "createdAt": 1760815033821
+  },
+  {
+    "id": "mgwo1goo.d",
+    "vacancyId": "3",
+    "userId": "seed-employee-3",
+    "message": "",
+    "status": "submitted",
+    "createdAt": 1760815424184
+  },
+  {
+    "id": "mgwo6vll.aeb",
+    "vacancyId": "4",
+    "userId": "seed-employee-3",
+    "message": "",
+    "status": "submitted",
+    "createdAt": 1760815676793
+  },
+  {
+    "id": "mgwobdqy.cnm",
+    "vacancyId": "5",
+    "userId": "seed-employee-3",
+    "message": "",
+    "status": "submitted",
+    "createdAt": 1760815886938
   }
 ]
