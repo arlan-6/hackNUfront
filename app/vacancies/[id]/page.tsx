@@ -1,4 +1,3 @@
-import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 import { Alert, Anchor, Badge, Container, Group, Stack, Text, Title } from '@mantine/core';
 import { getCurrentUser } from '@/app/actions/auth';
@@ -6,7 +5,10 @@ import { ApplyToVacancy } from '@/components/Vacancy/ApplyToVacancy';
 import { hasAppliedToVacancy } from '@/data/applications';
 import { getVacancy } from '@/data/vacancies';
 
-type Props = { params: Promise<{ id: string }>; searchParams?: { [key: string]: string } };
+type Props = {
+  params: Promise<{ id: string }>;
+  searchParams?: Promise<Record<string, string>>;
+};
 
 export default async function VacancyDetailsPage({ params, searchParams }: Props) {
   const { id } = await params;
@@ -16,8 +18,8 @@ export default async function VacancyDetailsPage({ params, searchParams }: Props
   const canApply = !!user && user.role === 'employee';
   const alreadyApplied = user ? hasAppliedToVacancy(vacancy.id, user.id) : false;
 
-  const resolvedSearchParams = await searchParams;
-  const applied = resolvedSearchParams?.applied === '1';
+  const sp = searchParams ? await searchParams : undefined;
+  const applied = sp?.applied === '1';
 
   return (
     <Container py="lg">
