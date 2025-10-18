@@ -1,10 +1,10 @@
-import { ColorSchemeToggle } from '../components/ColorSchemeToggle/ColorSchemeToggle';
-import { Welcome } from '../components/Welcome/Welcome';
+
+import { VacancyList } from '@/components/VacancyList/VacancyList';
 
 export default function HomePage() {
   return (
     <>
-      Hello world
+      <VacancyList />
     </>
   );
 }

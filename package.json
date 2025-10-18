@@ -37,6 +37,7 @@
     "@eslint/eslintrc": "^3",
     "@eslint/js": "^9.37.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
+    "@mantine/notifications": "^8.3.4",
     "@storybook/addon-themes": "^9.1.10",
     "@storybook/nextjs": "^9.1.10",
     "@storybook/react": "^9.1.10",

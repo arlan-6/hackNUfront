@@ -1,0 +1,34 @@
+[
+  {
+    "id": "seed-app-1",
+    "vacancyId": "1",
+    "userId": "seed-employee-3",
+    "message": "Hi Aigul, I am interested in the Frontend role. I have React and JS experience. Thanks!",
+    "status": "submitted",
+    "createdAt": 1760792560395
+  },
+  {
+    "id": "seed-app-2",
+    "vacancyId": "3",
+    "userId": "seed-employee-3",
+    "message": "Hello! I am a junior full-stack dev and would love to join as Backend Engineer.",
+    "status": "submitted",
+    "createdAt": 1760793160395
+  },
+  {
+    "id": "mgwb5l2p.dsg",
+    "vacancyId": "6",
+    "userId": "seed-employee-3",
+    "message": "asdasd",
+    "status": "submitted",
+    "createdAt": 1760793781489
+  },
+  {
+    "id": "mgwbcek5.y7g",
+    "vacancyId": "2",
+    "userId": "seed-employee-3",
+    "message": "sdfsdf",
+    "status": "submitted",
+    "createdAt": 1760794099637
+  }
+]
