@@ -1,72 +1,89 @@
-import { useContext, useEffect, useState } from "react";
-import { WidgetContext } from "../lib/context";
-import { Box, Button, Group, Paper, Text, Transition, Avatar } from "@mantine/core";
-import  Chat  from "./chat";
-import { getVacancy, Vacancy } from "@/data/vacancies";
-import { getCurrentUser } from "@/app/actions/auth";
-import { Resume } from "@/data/users";
+import { useContext, useEffect, useState } from 'react';
+import { Avatar, Box, Button, Group, Paper, Text, Transition } from '@mantine/core';
+import { getCurrentUser } from '@/app/actions/auth';
+import { Resume } from '@/data/users';
+import { getVacancy, Vacancy } from '@/data/vacancies';
+import { WidgetContext } from '../lib/context';
+import Chat from './chat';
 
 export function Widget() {
   const { isOpen, setIsOpen } = useContext(WidgetContext);
   const [vacancy, setVacancy] = useState<Vacancy>();
-  const [resume, setResume] = useState<string|Resume>();
+  const [resume, setResume] = useState<string | Resume>();
+  // Fetch current user on mount (client) and set resume
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      try {
+        const user = await getCurrentUser();
+        if (!mounted) return;
+        if (user && user.role === 'employee') {
+          if (!user.resume) {
+            setResume("User don't have resume");
+          } else {
+            setResume(user.resume);
+          }
+        }
+      } catch (e) {
+        // silent fail; resume stays undefined
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
+  }, []);
   // Open widget when any element with class "submit_applicaiotn" is clicked
   // Note: import useEffect from react at the top: import { useContext, useEffect } from "react";
   useEffect(() => {
-    if (typeof document === "undefined") return;
-    const vacancyId=window.location.pathname.split('/').pop() || '';
+    if (typeof document === 'undefined') return;
+    const vacancyId = window.location.pathname.split('/').pop() || '';
 
-    if(!vacancyId)return;
+    if (!vacancyId) return;
     setVacancy(getVacancy(vacancyId));
 
-    const getUserData=async()=>{
-
-      const user = await getCurrentUser();
-
-      if(user && user.role==='employee'){
-        if(!user.resume){setResume('User don\'t have resume');}
-         // Replace with actual resume fetching logic
-         else{setResume(user.resume);}
-      }
-    }
-      getUserData()
     const handler = (e: MouseEvent) => {
       const target = e.target as Element | null;
-      if (target && target.closest?.(".submit_applicaiotn")) {
+      if (target && target.closest?.('.submit_applicaiotn')) {
         setIsOpen(true);
       }
     };
 
-    document.addEventListener("click", handler);
+    document.addEventListener('click', handler);
     return () => {
-      document.removeEventListener("click", handler);
+      document.removeEventListener('click', handler);
     };
-  }, [setIsOpen])
+  }, [setIsOpen]);
   // When widget is closed
-  if (!isOpen && vacancy && resume) {
-    return (
-      <Transition mounted transition="pop" duration={180} timingFunction="ease-out">
-        {(btnStyles) => (
-          <Button
-            onClick={() => setIsOpen(true)}
-            radius="md"
-            size="md"
-            variant="filled"
-            style={{
-              position: "fixed",
-              bottom: 20,
-              right: 20,
-              zIndex: 9999,
-              ...btnStyles,
-            }}
-          >
-            Open Widget
-          </Button>
-        )}
-      </Transition>
-    );
+  // if (!isOpen && vacancy && resume) {
+  //   return (
+  //     <Transition mounted transition="pop" duration={180} timingFunction="ease-out">
+  //       {(btnStyles) => (
+  //         <Button
+  //           onClick={() => setIsOpen(true)}
+  //           radius="md"
+  //           size="md"
+  //           variant="filled"
+  //           style={{
+  //             position: 'fixed',
+  //             bottom: 20,
+  //             right: 20,
+  //             zIndex: 9999,
+  //             ...btnStyles,
+  //           }}
+  //         >
+  //           Open Widget
+  //         </Button>
+  //       )}
+  //     </Transition>
+  //   );
+  // }
+    if(!isOpen) {
+    return null;
   }
-
+  // 
+  if(!resume && !vacancy ) {
+    return null;
+  }
   // When widget is open
   return (
     <>
@@ -95,15 +112,15 @@ export function Widget() {
             radius="lg"
             withBorder
             style={{
-              position: "fixed",
+              position: 'fixed',
               bottom: 20,
               right: 20,
               width: 360,
-              maxHeight: "calc(100vh - 3rem)",
-              display: "flex",
-              flexDirection: "column",
-              overflow: "hidden",
-              transformOrigin: "bottom right",
+              maxHeight: 'calc(100vh - 3rem)',
+              display: 'flex',
+              flexDirection: 'column',
+              overflow: 'hidden',
+              transformOrigin: 'bottom right',
               zIndex: 9999,
               ...styles,
             }}
@@ -112,7 +129,7 @@ export function Widget() {
             <Group
               justify="space-between"
               p="sm"
-              style={{ borderBottom: "1px solid var(--mantine-color-gray-3)" }}
+              style={{ borderBottom: '1px solid var(--mantine-color-gray-3)' }}
             >
               <Group>
                 <Avatar radius="xl">🤖</Avatar>
@@ -129,8 +146,8 @@ export function Widget() {
             </Group>
 
             {/* Chat component inside widget */}
-            <Box style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-              {vacancy && resume && <Chat vacancy={vacancy} resume={resume}/>}
+            <Box style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+              {vacancy && resume && <Chat vacancy={vacancy} resume={resume} />}
             </Box>
           </Paper>
         )}

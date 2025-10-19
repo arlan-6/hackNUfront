@@ -1,42 +1,10 @@
 [
   {
-    "id": "mgwnpyhx.1nt",
+    "id": "mgxcjpbt.0s",
     "vacancyId": "1",
-    "userId": "seed-employee-3",
+    "userId": "seed-employee-2",
     "message": "",
     "status": "submitted",
-    "createdAt": 1760814887397
-  },
-  {
-    "id": "mgwnt3h9.2vs",
-    "vacancyId": "2",
-    "userId": "seed-employee-3",
-    "message": "",
-    "status": "submitted",
-    "createdAt": 1760815033821
-  },
-  {
-    "id": "mgwo1goo.d",
-    "vacancyId": "3",
-    "userId": "seed-employee-3",
-    "message": "",
-    "status": "submitted",
-    "createdAt": 1760815424184
-  },
-  {
-    "id": "mgwo6vll.aeb",
-    "vacancyId": "4",
-    "userId": "seed-employee-3",
-    "message": "",
-    "status": "submitted",
-    "createdAt": 1760815676793
-  },
-  {
-    "id": "mgwobdqy.cnm",
-    "vacancyId": "5",
-    "userId": "seed-employee-3",
-    "message": "",
-    "status": "submitted",
-    "createdAt": 1760815886938
+    "createdAt": 1760856585977
   }
 ]
